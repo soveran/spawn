@@ -8,8 +8,9 @@ module ActiveRecord
       @@spawn[self.name] = default
     end
 
-    def self.spawn
+    def self.spawn attrs = Hash.new
       model = new &@@spawn[self.name]
+      model.attributes = attrs unless attrs.empty?
       yield model if block_given?
       model.save!
       model
