@@ -1,35 +1,31 @@
-Spawner
-=======
+= Spawner
 
 Spawner is a simple fixtures replacement. In the examples
 I use Faker to generate random data, but you can use any method.
 
-Usage
-=====
+== Usage
 
-class User < ActiveRecord::Base
-  spawner do |user|
-    user.name = Faker::Name.name
-    user.email = Faker::Internet.email
+  class User < ActiveRecord::Base
+    spawner do |user|
+      user.name = Faker::Name.name
+      user.email = Faker::Internet.email
+    end
   end
-end
 
 Then, in your test or in any other place:
 
-@user = User.spawn
+  @user = User.spawn
 
 Or, if you need something special:
 
-@user = User.spawn do |user|
-  user.name = "Larralde!"
-end
+  @user = User.spawn do |user|
+    user.name = "Larralde!"
+  end
 
 Or even this:
 
-@user = User.spawn :name => "Larralde!"
+  @user = User.spawn :name => "Larralde!"
 
-
---
 Thanks to Foca (contacto@nicolassanguinetti.info) for his suggestions.
 
 Copyright (c) 2008 Michel Martens for CitrusByte (http://www.citrusbyte.com).
