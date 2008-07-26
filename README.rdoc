@@ -19,12 +19,12 @@ Then, in your test or in any other place:
 Or, if you need something special:
 
   @user = User.spawn do |user|
-    user.name = "Larralde!"
+    user.name = "Michel Martens"
   end
 
 Or even this:
 
-  @user = User.spawn :name => "Larralde!"
+  @user = User.spawn :name => "Michel Martens"
 
 Thanks to Foca (contacto@nicolassanguinetti.info) for his suggestions.
 
