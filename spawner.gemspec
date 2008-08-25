@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
     "init.rb",
     "extras/samples.rake"]
   s.rdoc_options = ["--main", "README.rdoc"]
-  s.extra_rdoc_files = []
+  s.extra_rdoc_files = ['README.rdoc']
   s.add_dependency("activerecord", ["> 0.0.0"])
 end

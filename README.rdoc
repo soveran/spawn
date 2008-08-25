@@ -26,7 +26,17 @@ Or even this:
 
   @user = User.spawn :name => "Michel Martens"
 
-Thanks to Foca (contacto@nicolassanguinetti.info) for his suggestions.
+== Installation
+
+You can install it as a Rails plugin or as a gem:
+
+  $ gem sources -a http://gems.github.com (you only have to do this once)
+  $ sudo gem install soveran-spawner
+
+
+== Thanks
+
+Thanks to Foca (http://github.com/foca/) for his suggestions and Pedro (http://github.com/peterpunk/) for the gemspec.
 
 Copyright (c) 2008 Michel Martens for CitrusByte (http://www.citrusbyte.com).
 Released under the MIT license.
