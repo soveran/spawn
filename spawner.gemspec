@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = "spawner"
   s.version = "0.0.2"
-  s.date = "2008-08-24"
+  s.date = "2008-09-7"
   s.summary = "Simple fixtures replacement for ActiveRecord"
   s.email = "michel@soveran.com"
   s.homepage = "http://github.com/soveran/spawner"
-  s.description = "Generates Random data for test, demo, etc."
+  s.description = "Populates the database with custom data."
   s.has_rdoc = true
   s.authors = ["Michel Martens"]
   s.files = [
