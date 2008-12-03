@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary = "Simple fixtures replacement for ActiveRecord"
   s.email = "michel@soveran.com"
   s.homepage = "http://github.com/soveran/spawner"
-  s.description = "Populates the database with custom data."
+  s.description = "Simple fixtures replacement that allows to populate the database with custom data."
   s.has_rdoc = true
   s.authors = ["Michel Martens"]
   s.files = [
