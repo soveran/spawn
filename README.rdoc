@@ -5,11 +5,32 @@ I use Faker to generate random data, but you can use any method.
 
 == Usage
 
+With ActiveRecord:
+
   class User < ActiveRecord::Base
     spawner do |user|
       user.name = Faker::Name.name
       user.email = Faker::Internet.email
     end
+  end
+
+With Sequel:
+
+  class User < Sequel::Model
+    extend Spawner
+
+    spawner do |user|
+      user.name = Faker::Name.name
+      user.email = Faker::Internet.email
+    end
+  end
+
+If you don't want to pollute your class definition, you
+can of course use it from outside:
+
+  User.spawner do |user|
+    user.name = Faker::Name.name
+    user.email = Faker::Internet.email
   end
 
 Then, in your test or in any other place:
@@ -27,8 +48,6 @@ Or even this:
   @user = User.spawn :name => "Michel Martens"
 
 == Installation
-
-You can install it as a Rails plugin or as a gem:
 
   $ gem sources -a http://gems.github.com (you only have to do this once)
   $ sudo gem install soveran-spawner
