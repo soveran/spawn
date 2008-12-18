@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "spawner"
-  s.version = "0.0.3"
-  s.date = "2008-12-4"
+  s.version = "0.0.4"
+  s.date = "2008-12-18"
   s.summary = "Simple fixtures replacement for Sequel, ActiveRecord and probably many other ORMs"
   s.email = "michel@soveran.com"
   s.homepage = "http://github.com/soveran/spawner"
