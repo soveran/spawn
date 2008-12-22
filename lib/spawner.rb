@@ -6,9 +6,8 @@ module Spawner
     @@spawn[self.name] = default
   end
 
-  def spawn attrs = Hash.new
-    model = new &@@spawn[self.name]
-    model.attributes = attrs unless attrs.empty?
+  def spawn(*args)
+    model = new(*args, &@@spawn[self.name])
     yield model if block_given?
     model.save!
     model
