@@ -1,15 +1,14 @@
+require 'ostruct'
+
 module Spawner
   def spawner &default
-    @@spawn ||= Hash.new do |hash, key|
-      hash[key] = lambda { |model| model }
-    end
+    @@spawn ||= Hash.new { |hash, key| hash[key] = lambda { |model| model } }
     @@spawn[self.name] = default
   end
 
-  def spawn(*args)
-    model = new(*args, &@@spawn[self.name])
-    yield model if block_given?
-    model.save!
-    model
+  def spawn attrs = {}
+    model = OpenStruct.new
+    @@spawn[self.name].call(model)
+    create(model.send(:table).merge(attrs))
   end
 end

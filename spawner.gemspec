@@ -6,15 +6,14 @@ Gem::Specification.new do |s|
   s.email = "michel@soveran.com"
   s.homepage = "http://github.com/soveran/spawner"
   s.description = "Simple fixtures replacement that allows to populate the database with custom data."
-  s.has_rdoc = true
+  s.has_rdoc = false
   s.authors = ["Michel Martens"]
   s.files = [
-    "README.rdoc",
-    "MIT-LICENSE",
+    "README.markdown",
+    "LICENSE",
     "spawner.gemspec",
     "lib/spawner.rb",
     "rails/init.rb",
-    "extras/samples.rake"]
-  s.rdoc_options = ["--main", "README.rdoc"]
-  s.extra_rdoc_files = ['README.rdoc']
+    "extras/samples.rake",
+    "test/all_test.rb"]
 end
