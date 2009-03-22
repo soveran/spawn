@@ -7,7 +7,7 @@ choice.
 Description
 -----------
 
-Spawner is a very small library (just 15 lines of code) that can
+Spawner is a very small library (just 14 lines of code) that can
 effectively replace fixtures or any other huge library for the same task.
 
 Usage
@@ -50,12 +50,6 @@ Then, in your test or in any other place:
 
 Or, if you need something special:
 
-    @user = User.spawn do |user|
-      user.name = "Michel Martens"
-    end
-
-Or even this:
-
     @user = User.spawn :name => "Michel Martens"
 
 Installation
@@ -67,7 +61,7 @@ Installation
 ### Thanks
 
 Thanks to Foca (http://github.com/foca/) for his suggestions and Pedro
-(http://github.com/peterpunk/) for the gemspec.
+(http://github.com/peterpunk/) for the original gemspec.
 
 License
 -------
