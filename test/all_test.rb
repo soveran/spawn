@@ -9,7 +9,7 @@ class Foo
     @attributes = attrs
   end
 
-  def self.create(attrs = {})
+  def self.create!(attrs = {})
     new(attrs)
   end
 

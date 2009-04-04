@@ -8,6 +8,6 @@ module Spawner
 
   def spawn attrs = {}
     @@spawn[self.name].call(model = OpenStruct.new)
-    create(model.send(:table).merge(attrs))
+    create!(model.send(:table).merge(attrs))
   end
 end
