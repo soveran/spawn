@@ -2,14 +2,14 @@ require 'rubygems'
 require 'contest'
 require File.dirname(__FILE__) + "/../lib/spawner"
 
-class Foo
+class Base
   attr_accessor :attributes
 
   def initialize(attrs = {})
     @attributes = attrs
   end
 
-  def self.create!(attrs = {})
+  def self.create(attrs = {})
     new(attrs)
   end
 
@@ -19,9 +19,15 @@ class Foo
 
   extend Spawner
 
-  spawner do |foo|
-    foo.bar = 7
-    foo.baz = 8
+  spawner do |object|
+    object.bar = 7
+    object.baz = 8
+  end
+end
+
+class Foo < Base
+  class << self
+    alias_method :create!, :create
   end
 end
 
@@ -32,6 +38,9 @@ class Bar < Foo
     bar.bar = 9
     bar.baz = 10
   end
+end
+
+class Baz < Base
 end
 
 class TestFoo < Test::Unit::TestCase
@@ -95,6 +104,13 @@ class TestFoo < Test::Unit::TestCase
             end
           end
         end
+      end
+    end
+
+    context "and it doesn't understand #create! (only #create)" do
+      should "work anyway" do
+        baz = Baz.spawn :bar => 1
+        assert_equal 1, baz.bar
       end
     end
   end

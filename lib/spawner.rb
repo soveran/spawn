@@ -8,6 +8,7 @@ module Spawner
 
   def spawn attrs = {}
     @@spawn[self.name].call(model = OpenStruct.new)
-    create!(model.send(:table).merge(attrs))
+    factory_method = respond_to?(:create!) ? :create! : :create
+    send(factory_method, model.send(:table).merge(attrs))
   end
 end
