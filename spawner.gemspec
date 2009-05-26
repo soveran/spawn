@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "spawner"
-  s.version = "0.0.7"
+  s.version = "0.0.8"
   s.date = "2008-12-18"
   s.summary = "Simple fixtures replacement for Sequel, ActiveRecord and probably many other ORMs"
   s.email = "michel@soveran.com"
@@ -15,5 +15,7 @@ Gem::Specification.new do |s|
     "lib/spawner.rb",
     "rails/init.rb",
     "extras/samples.rake",
-    "test/all_test.rb"]
+    "test/all_test.rb",
+    "test/sequel_test.rb",
+    "test/active_record_test.rb"]
 end
