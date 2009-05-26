@@ -1,13 +1,13 @@
-require 'rubygems'
-require 'sequel'
-require 'contest'
+require "rubygems"
+require "sequel"
+require "contest"
 require File.dirname(__FILE__) + "/../lib/spawner"
-require 'faker'
+require "faker"
 
 DB = Sequel.sqlite
-DB << "CREATE TABLE users (name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL)"
+DB << "CREATE TABLE sequel_users (name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL)"
 
-class User < Sequel::Model
+class SequelUser < Sequel::Model
   extend Spawner
 
   validates do
@@ -20,9 +20,9 @@ class User < Sequel::Model
   end
 end
 
-class TestSpawner < Test::Unit::TestCase
+class TestSpawnerWithSequel < Test::Unit::TestCase
   setup do
-    @user = User.spawn :name => "John"
+    @user = SequelUser.spawn :name => "John"
   end
 
   context "spawned user" do
@@ -33,7 +33,7 @@ class TestSpawner < Test::Unit::TestCase
     context "with invalid attributes" do
       should "raise an error" do
         assert_raise Sequel::Error::InvalidValue do
-          User.spawn :name => nil
+          SequelUser.spawn :name => nil
         end
       end
     end
