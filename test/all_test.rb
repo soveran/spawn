@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'contest'
-require File.dirname(__FILE__) + "/../lib/spawner"
+require File.dirname(__FILE__) + "/../lib/spawn"
 
 class Base
   attr_accessor :attributes
@@ -17,7 +17,7 @@ class Base
   def baz; attributes[:baz] end
   def self.name; "Foo" end
 
-  extend Spawner
+  extend Spawn
 
   spawner do |object|
     object.bar = 7
@@ -59,9 +59,9 @@ class TestFoo < Test::Unit::TestCase
     end
   end
 
-  context "that implements Spawner" do
-    should "be kind of Spawner" do
-      assert Foo.kind_of?(Spawner)
+  context "that implements Spawn" do
+    should "be kind of Spawn" do
+      assert Foo.kind_of?(Spawn)
     end
 
     context "when instantiated with spawn" do
@@ -82,9 +82,9 @@ class TestFoo < Test::Unit::TestCase
       end
 
       context "and a class Bar" do
-        context "that also implements Spawner" do
-          should "be kind of Spawner" do
-            assert Bar.kind_of?(Spawner)
+        context "that also implements Spawn" do
+          should "be kind of Spawn" do
+            assert Bar.kind_of?(Spawn)
           end
 
           context "when sent :name" do

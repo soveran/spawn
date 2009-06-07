@@ -1,4 +1,4 @@
-Spawner
+Spawn
 =======
 
 A ridiculously simple fixtures replacement for your web framework of
@@ -7,7 +7,7 @@ choice.
 Description
 -----------
 
-Spawner is a very small library (just 14 lines of code) that can
+Spawn is a very small library (just 14 lines of code) that can
 effectively replace fixtures or any other huge library for the same task.
 
 Usage
@@ -28,7 +28,7 @@ With ActiveRecord:
 With Sequel:
 
     class User < Sequel::Model
-      extend Spawner
+      extend Spawn
 
       spawner do |user|
         user.name = Faker::Name.name
@@ -55,8 +55,7 @@ Or, if you need something special:
 Installation
 ------------
 
-    $ gem sources -a http://gems.github.com (you only have to do this once)
-    $ sudo gem install soveran-spawner
+    $ sudo gem install spawn
 
 ### Thanks
 

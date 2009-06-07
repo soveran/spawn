@@ -1,14 +1,14 @@
 require "rubygems"
 require "sequel"
 require "contest"
-require File.dirname(__FILE__) + "/../lib/spawner"
+require File.dirname(__FILE__) + "/../lib/spawn"
 require "faker"
 
 DB = Sequel.sqlite
 DB << "CREATE TABLE sequel_users (name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL)"
 
 class SequelUser < Sequel::Model
-  extend Spawner
+  extend Spawn
 
   validates do
     presence_of :name
@@ -20,7 +20,7 @@ class SequelUser < Sequel::Model
   end
 end
 
-class TestSpawnerWithSequel < Test::Unit::TestCase
+class TestSpawnWithSequel < Test::Unit::TestCase
   setup do
     @user = SequelUser.spawn :name => "John"
   end

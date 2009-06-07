@@ -1,7 +1,7 @@
 require "rubygems"
 require "active_record"
 require "contest"
-require File.dirname(__FILE__) + "/../lib/spawner"
+require File.dirname(__FILE__) + "/../lib/spawn"
 require "faker"
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile  => ":memory:")
@@ -13,7 +13,7 @@ ActiveRecord::Schema.define do
 end
 
 class ActiveRecordUser < ActiveRecord::Base
-  extend Spawner
+  extend Spawn
 
   validates_presence_of :name
 
@@ -23,7 +23,7 @@ class ActiveRecordUser < ActiveRecord::Base
   end
 end
 
-class TestSpawnerWithActiveRecord < Test::Unit::TestCase
+class TestSpawnWithActiveRecord < Test::Unit::TestCase
   setup do
     @user = ActiveRecordUser.spawn :name => "John"
   end
