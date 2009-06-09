@@ -8,6 +8,5 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/soveran/spawn"
   s.files = ["lib/spawn.rb", "rails/init.rb", "README.markdown", "LICENSE", "Rakefile", "test/active_record_test.rb", "test/all_test.rb", "test/sequel_test.rb", "spawn.gemspec"]
   s.require_paths = ['lib']
-  s.has_rdoc = false
   s.specification_version = 2 if s.respond_to? :specification_version=
 end
