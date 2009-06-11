@@ -7,7 +7,7 @@ module Spawn
   end
 
   def spawn attrs = {}
-    @@spawn[self.name].call(model = OpenStruct.new)
+    @@spawn[self.name].call(model = OpenStruct.new(attrs))
     factory_method = respond_to?(:create!) ? :create! : :create
     send(factory_method, model.send(:table).merge(attrs))
   end

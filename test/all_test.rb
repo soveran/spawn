@@ -43,6 +43,14 @@ end
 class Baz < Base
 end
 
+class Qux < Base
+  def self.name; "Qux"; end
+
+  spawner do |barz|
+    barz.bar ||= raise "Should have received :bar"
+  end
+end
+
 class TestFoo < Test::Unit::TestCase
   should "have a name class method" do
     assert Foo.respond_to?(:name)
@@ -55,6 +63,14 @@ class TestFoo < Test::Unit::TestCase
         foo = Foo.new :bar => 1, :baz => 2
         assert_equal 1, foo.bar
         assert_equal 2, foo.baz
+      end
+
+      should "pass the values to the block" do
+        assert_raise(RuntimeError) do
+          Qux.spawn
+        end
+
+        assert_equal "Qux", Qux.spawn(:bar => "Qux").bar
       end
     end
   end
