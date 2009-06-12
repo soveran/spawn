@@ -52,6 +52,26 @@ Or, if you need something special:
 
     @user = User.spawn :name => "Michel Martens"
 
+### Using the attributes hash inside the block
+
+Some times the RHS of your assignment is costly or has side effects,
+and you don't want it to execute when you already passed the value
+in the attributes hash. Since the values are passed to the block,
+you can benefit from using `||=`:
+
+    User.spawner do |user|
+      user.profile ||= Profile.spawn
+    end
+
+Then, if you pass a `:profile`:
+
+    User.spawn(:profile => Profile.first)
+
+You can verify that only once `Profile` was created. Although this
+may sound evident, it can bite you if you rely on the RHS not executing
+(e.g. if you're using Spawn to populate fake data into a database and
+you want to control how many instances you create).
+
 Installation
 ------------
 
@@ -59,8 +79,8 @@ Installation
 
 ### Thanks
 
-Thanks to Foca (http://github.com/foca/) for his suggestions and Pedro
-(http://github.com/peterpunk/) for the original gemspec.
+Thanks to [Foca](http://github.com/foca) for his suggestions and
+[Pedro](http://github.com/peterpunk) for the original gemspec.
 
 License
 -------
