@@ -15,9 +15,14 @@ class Base
 
   def bar; attributes[:bar] end
   def baz; attributes[:baz] end
-  def self.name; "Foo" end
 
   extend Spawn
+end
+
+class Foo < Base
+  class << self
+    alias_method :create!, :create
+  end
 
   spawner do |object|
     object.bar = 7
@@ -25,15 +30,7 @@ class Base
   end
 end
 
-class Foo < Base
-  class << self
-    alias_method :create!, :create
-  end
-end
-
 class Bar < Foo
-  def self.name; "Bar" end
-
   spawner do |bar|
     bar.bar = 9
     bar.baz = 10
@@ -41,6 +38,26 @@ class Bar < Foo
 end
 
 class Baz < Base
+  spawner do |object|
+    object.bar = 7
+    object.baz = 8
+  end
+end
+
+module FooBar
+  class Baz < ::Base
+    spawner do |baz|
+      baz.bar = 1
+    end
+  end
+end
+
+module FooBaz
+  class Baz < ::Base
+    spawner do |baz|
+      baz.bar = 2
+    end
+  end
 end
 
 class Qux < Base
@@ -129,5 +146,10 @@ class TestFoo < Test::Unit::TestCase
         assert_equal 1, baz.bar
       end
     end
+  end
+
+  should "respect namespaces" do
+    assert_equal 1, FooBar::Baz.spawn.bar
+    assert_equal 2, FooBaz::Baz.spawn.bar
   end
 end
