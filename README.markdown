@@ -52,12 +52,22 @@ Or, if you need something special:
 
     @user = User.spawn :name => "Michel Martens"
 
-### Using the attributes hash inside the block
+Conditional evaluation
+----------------------
 
-Some times the RHS of your assignment is costly or has side effects,
-and you don't want it to execute when you already passed the value
-in the attributes hash. Since the values are passed to the block,
-you can benefit from using `||=`:
+Spawn will execute the right hand side of your assignment even if you
+provide a value for some particular key. Consider the following example:
+
+    User.spawner do |user|
+      user.profile = Profile.spawn # Profile.spawn is executed even if you provide a value for :profile.
+    end
+
+    User.spawn(:profile => Profile.first)
+
+Here, you will be creating an extra instance of `Profile`, because when
+the block is evaluated it calls `Profile.spawn`. If the right hand side
+of your assignment is costly or has side effects, you may want to avoid
+this behavior by using `||=`:
 
     User.spawner do |user|
       user.profile ||= Profile.spawn
@@ -67,7 +77,7 @@ Then, if you pass a `:profile`:
 
     User.spawn(:profile => Profile.first)
 
-You can verify that only once `Profile` was created. Although this
+You can verify that `Profile.spawn` is never called. Although this
 may sound evident, it can bite you if you rely on the RHS not executing
 (e.g. if you're using Spawn to populate fake data into a database and
 you want to control how many instances you create).
@@ -85,7 +95,7 @@ Thanks to [Foca](http://github.com/foca) for his suggestions and
 License
 -------
 
-Copyright (c) 2009 Michel Martens for Citrusbyte
+Copyright (c) 2009 Michel Martens and Damian Janowski
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
