@@ -10,8 +10,8 @@ DB << "CREATE TABLE sequel_users (name VARCHAR(255) NOT NULL, email VARCHAR(255)
 class SequelUser < Sequel::Model
   extend Spawn
 
-  validates do
-    presence_of :name
+  def validate
+    errors.add(:name, "Not present") if name.nil? or name.empty?
   end
 
   spawner do |user|
