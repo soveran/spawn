@@ -25,5 +25,7 @@ module Spawn
 
     # Return the model if it's valid and can be saved.
     model.valid? and model.save or raise(Invalid)
+
+    model
   end
 end
