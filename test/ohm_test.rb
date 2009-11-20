@@ -1,27 +1,28 @@
 require "rubygems"
-require "sequel"
+require "ohm"
 require "contest"
 require File.dirname(__FILE__) + "/../lib/spawn"
-require "faker"
 
-DB = Sequel.sqlite
-DB << "CREATE TABLE sequel_users (name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL)"
+Ohm.connect
 
-class SequelUser < Sequel::Model
+class OhmUser < Ohm::Model
   extend Spawn
 
+  attribute :name
+  attribute :email
+
   def validate
-    errors.add(:name, "Not present") if name.nil? or name.empty?
+    assert_present :name
   end
 
   spawner do |user|
-    user.email = Faker::Internet.email
+    user.email = "albert@example.com"
   end
 end
 
-class TestSpawnWithSequel < Test::Unit::TestCase
+class TestSpawnWithOhm < Test::Unit::TestCase
   setup do
-    @user = SequelUser.spawn :name => "John"
+    @user = OhmUser.spawn :name => "John"
   end
 
   context "spawned user" do
@@ -32,7 +33,7 @@ class TestSpawnWithSequel < Test::Unit::TestCase
     context "with invalid attributes" do
       should "raise an error" do
         assert_raise Spawn::Invalid do
-          SequelUser.spawn
+          OhmUser.spawn
         end
       end
     end

@@ -16,10 +16,8 @@ class ActiveRecordUser < ActiveRecord::Base
   extend Spawn
 
   validates_presence_of :name
-  attr_accessible :name
 
   spawner do |user|
-    user.name = Faker::Name.name
     user.email = Faker::Internet.email
   end
 end
@@ -37,16 +35,9 @@ class TestSpawnWithActiveRecord < Test::Unit::TestCase
     context "with invalid attributes" do
       should "raise an error" do
         assert_raise Spawn::Invalid do
-          ActiveRecordUser.spawn :name => nil
+          ActiveRecordUser.spawn
         end
       end
-    end
-  end
-
-  context "working with attr_accessible" do
-    should "bypass that limitation" do
-      @user = ActiveRecordUser.spawn :email => "john@example.com"
-      assert_equal "john@example.com", @user.email
     end
   end
 end

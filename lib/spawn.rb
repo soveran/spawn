@@ -10,22 +10,17 @@ module Spawn
   end
 
   def spawn params = {}
-    model = new
 
     # Grab default parameters from spawner block.
     @@spawn[self].call(attrs = OpenStruct.new(params))
 
-    # Assign attributes to model.
-    attrs.send(:table).merge(params).each do |key, value|
-      model.send("#{key}=", value)
-    end
+    # Initialize model
+    model = new(attrs.send(:table).merge(params))
 
     # Yield model for changes to be made before saving.
     yield(model) if block_given?
 
-    # Return the model if it's valid and can be saved.
-    model.valid? and model.save or raise(Invalid)
-
-    model
+    # Raise an error if the model is invalid or couldn't be saved.
+    model.valid? and model.save and model or raise(Invalid, model.errors.inspect)
   end
 end
