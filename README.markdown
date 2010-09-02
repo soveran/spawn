@@ -16,6 +16,11 @@ Usage
 In the examples below we are using [Faker](http://faker.rubyforge.org/)
 to generate random data, but you can use any method.
 
+Note that the object the spawner block yields is not an instance of
+User, but an OpenStruct that records the attributes passed and will in
+turn relay that information when the User is instantiated.
+
+
 With [ActiveRecord](http://api.rubyonrails.org/classes/ActiveRecord/Base.html):
 
     class User < ActiveRecord::Base
@@ -110,10 +115,12 @@ Installation
 
     $ sudo gem install spawn
 
-### Thanks
+### Contributors
 
-Thanks to [Foca](http://github.com/foca) for his suggestions and
-[Pedro](http://github.com/peterpunk) for the original gemspec.
+Thanks to [Foca](http://github.com/foca),
+[Pedro](http://github.com/peterpunk) and
+[Diego](http://github.com/oboxodo) for the suggestions and improvements
+to this tiny library.
 
 License
 -------
