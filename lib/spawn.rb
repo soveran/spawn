@@ -2,7 +2,7 @@ require "ostruct"
 
 module Spawn
 
-  Invalid = Class.new(ArgumentError)
+  class Invalid < ArgumentError; end
 
   def spawner &default
     @@spawn ||= Hash.new
