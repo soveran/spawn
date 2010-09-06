@@ -4,7 +4,7 @@ require "contest"
 require File.dirname(__FILE__) + "/../lib/spawn"
 require "faker"
 
-ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile  => ":memory:")
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database  => ":memory:")
 ActiveRecord::Schema.define do
   create_table :active_record_users do |table|
       table.column :name, :string
