@@ -15,7 +15,12 @@ module Spawn
     @@spawn[self].call(attrs = OpenStruct.new(params))
 
     # Initialize model
-    model = new(attrs.send(:table).merge(params))
+    model = new
+
+    # Use accessors instead of 'new(hash)' so we don't ignore non attr_accessible attributes
+    attrs.send(:table).merge(params).each do |key, value|
+      model.send("#{key}=", value)
+    end
 
     # Yield model for changes to be made before saving.
     yield(model) if block_given?
